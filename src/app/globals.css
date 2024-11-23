@@ -4,10 +4,12 @@
 
 
 
+
+
 @layer base {
   html,
   body {
-    @apply dark:bg-trueGray-900;
+    @apply bg-white dark:bg-trueGray-900;
   }
 }
 
