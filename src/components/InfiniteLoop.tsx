@@ -4,6 +4,7 @@ import userOneImg from '../../public/img/user1.jpg';
 import userTwoImg from '../../public/img/user2.jpg';
 import userThreeImg from '../../public/img/user3.jpg';
 import Image from 'next/image';
+
 import '@/styles/InfiniteLoop.css';
 
 const data1 = [
