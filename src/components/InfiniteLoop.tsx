@@ -1,10 +1,10 @@
 'use client';
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import './Infiniteloop.css';
 import userOneImg from '../../public/img/user1.jpg';
 import userTwoImg from '../../public/img/user2.jpg';
 import userThreeImg from '../../public/img/user3.jpg';
 import Image from 'next/image';
+import '@/styles/InfiniteLoop.css';
 
 const data1 = [
     { image: userOneImg, name: 'Agus Santoso', title: 'Pembuatan PT' },
