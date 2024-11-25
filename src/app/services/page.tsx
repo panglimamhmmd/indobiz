@@ -12,7 +12,6 @@ import { benefitOne, benefitTwo } from '@/components/data';
 export default function Home() {
     return (
         <Container>
-            <Hero />
             <SectionTitle
                 preTitle="Nextly Benefits"
                 title=" Why should you use this landing page"

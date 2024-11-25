@@ -147,10 +147,6 @@ const InfiniteLooper = function InfiniteLooper({
 export const InfiniteLoop = () => (
     <div className="app mt-10">
         <h1 className="description text-4xl text-black">Testimonials</h1>
-        <p className="font-serif text-sm dark:text-gray-600 text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
-            nisi.
-        </p>
 
         {/* row 1 */}
         <InfiniteLooper speed={100} direction="right">

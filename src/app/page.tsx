@@ -14,20 +14,21 @@ import Services from '../components/Services';
 export default function Home() {
     return (
         <>
-            <Container>
-                <Hero />
-            </Container>
+            <Hero />
+
             <Services />
+            {/* client side rendering */}
             <InfiniteLoop />
+            {/* client side rendering */}
             <Container>
                 <Articles />
             </Container>
             <Container>
                 <Cta />
             </Container>
-            <Container>
+            {/* <Container>
                 <Faq />
-            </Container>
+            </Container> */}
 
             {/* <SectionTitle
                 preTitle="Nextly Benefits"

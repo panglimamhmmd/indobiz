@@ -43,8 +43,8 @@ const Services = () => {
                 className="max-w-[100%] mt-6 h-[400px] lg:h-[450px] "
             >
                 {ServiceData.map((item) => (
-                    <SwiperSlide key={item.title}>
-                        <div className="group relative  shadow-lg text-white rounded-3xl px-4 py-6 overflow-hidden cursor-pointer transition-all duration-300  h-5/6 hover:shadow-xl hover:scale-120">
+                    <SwiperSlide className="py-2" key={item.title}>
+                        <div className="group relative shadow-lg text-black rounded-3xl px-4 py-6 overflow-hidden cursor-pointer h-5/6 hover:shadow-xl hover:-translate-y-2  transition ease-in-out duration-300">
                             <div
                                 className="absolute inset-0 bg-cover bg-center"
                                 style={{
@@ -57,20 +57,21 @@ const Services = () => {
 
                             <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-50 transition-opacity duration-300" />
 
-                            <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between py-4 w-full px-3 bg-orange ">
+                            <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between py-4 w-full px-3 bg-orange hover:bg-yellow-400">
                                 <div className="flex flex-col gap-2">
                                     <h1 className="text-lg lg:text-xl font-semibold">
                                         {item.title}
                                     </h1>
-                                    <p className="text-xs ">{item.content}</p>
-                                    <p className=" text-xs font-bold">3.5 Jt</p>
+                                    <p className="text-xs text-zinc-600  ">
+                                        {item.content}
+                                    </p>
+                                    <p className=" text-xs font-semibold ">
+                                        3.5 Jt
+                                    </p>
                                 </div>
 
-                                <div className="flex items-center">
-                                    <RxArrowTopRight className="w-[30px] h-[30px] text-white group-hover:text-gray-500 group-hover:rotate-45 transition-transform duration-300" />
-                                </div>
+                                <div className="flex items-center"></div>
                             </div>
-                            {/* <RxArrowTopRight className="absolute bottom-4 right-4 w-[30px] h-[30px] text-white group-hover:text-blue-500 group-hover:rotate-45 transition-transform duration-300" /> */}
                         </div>
                     </SwiperSlide>
                 ))}

@@ -22,12 +22,12 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={inter.className}>
-                <ThemeProvider attribute="class">
-                    <Navbar />
-                    <div>{children}</div>
-                    <Footer />
-                    <PopupWidget />
-                </ThemeProvider>
+                {/* <ThemeProvider attribute="class"> */}
+                <Navbar />
+                <div>{children}</div>
+                <Footer />
+                <PopupWidget />
+                {/* </ThemeProvider> */}
             </body>
         </html>
     );

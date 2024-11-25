@@ -2,19 +2,25 @@ import Image from 'next/image';
 import { Container } from '@/components/Container';
 import heroImg from '../../public/img/hero.png';
 export const Hero = () => {
+    const stats = [
+        { id: 1, name: 'Transactions every 24 hours', value: '44 million' },
+        { id: 2, name: 'Assets under holding', value: '$119 trillion' },
+        { id: 3, name: 'New users annually', value: '46,000' },
+    ];
     return (
         <>
             <Container className="flex flex-wrap ">
                 <div className="flex items-center w-full lg:w-1/2">
                     <div className="max-w-2xl mb-8">
                         <h1 className="text-4xl font-bold leading-   tracking-tight text-black lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-                            Free Landing Page Template for startups
+                            Indobiz: Solusi Jasa Legalitas Terpercaya
                         </h1>
-                        <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
-                            Nextly is a free landing page & marketing website
-                            template for startups and indie projects. Its built
-                            with Next.js & TailwindCSS. And its completely
-                            open-source.
+                        <p className="py-10 text-base leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
+                            Indobiz hadir untuk memberikan solusi legalitas yang
+                            menyeluruh bagi pengusaha dan perusahaan, memastikan
+                            bahwa setiap langkah bisnis Anda berjalan sesuai
+                            dengan hukum yang berlaku dan mendukung kesuksesan
+                            jangka panjang.
                         </p>
 
                         <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
@@ -23,7 +29,7 @@ export const Hero = () => {
                                     href="https://web3templates.com/templates/nextly-landing-page-template-for-startups"
                                     target="_blank"
                                     rel="noopener"
-                                    className="px-8 hover:scale-110 transition-transform content-center py-2 text-md lg:text-lg font-bold text-center text-orange border-orange border-2 rounded-2xl "
+                                    className="px-8 hover:scale-105 duration-300 text-sm content-center py-2 lg:text-lg font-bold text-center text-orange border-orange border-2 rounded-xl "
                                 >
                                     Services
                                 </a>
@@ -31,74 +37,11 @@ export const Hero = () => {
                                     href="https://web3templates.com/templates/nextly-landing-page-template-for-startups"
                                     target="_blank"
                                     rel="noopener"
-                                    className="px-8 hover:scale-110 transition-transform content-center py-2 text-md lg:text-lg font-bold text-center text-white bg-orange rounded-2xl  "
+                                    className="px-8 text-nowrap hover:scale-105 transition-transform  content-center py-2 text-sm lg:text-lg font-bold text-center text-white bg-orange rounded-xl  "
                                 >
                                     Konsultasi Sekarang
                                 </a>
                             </div>
-
-                            {/* <a
-                                href="https://github.com/web3templates/nextly-template/"
-                                target="_blank"
-                                rel="noopener"
-                                className="flex items-center space-x-2 text-gray-500 dark:text-gray-400"
-                            >
-                                <svg
-                                    role="img"
-                                    width="24"
-                                    height="24"
-                                    className="w-5 h-5"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <title>GitHub</title>
-                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                                </svg>
-                            </a> */}
-                            {/* <div>
-                                <div className="flex gap-1">
-                                    <a
-                                        href="https://www.facebook.com"
-                                        target="_blank"
-                                        rel="noopener"
-                                        className="hover:scale-110 transition-transform flex items-center space-x-2 text-orange dark:text-gray-400 border border-orange rounded-full px-2 py-2"
-                                    >
-                                        <svg
-                                            role="img"
-                                            width="24"
-                                            height="24"
-                                            className="w-5 h-5"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <title>Facebook</title>
-                                            <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.747v-9.294H9.974v-3.622h3.098V9.074c0-3.045 1.804-4.722 4.565-4.722 1.327 0 2.671.264 2.671.264v3.053h-1.534c-1.507 0-1.978.93-1.978 1.883v2.251h3.178l-.508 3.622h-2.67V24h5.25c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z" />
-                                        </svg>
-                                    </a>
-
-                                    <a
-                                        href="https://twitter.com"
-                                        target="_blank"
-                                        rel="noopener"
-                                        className="hover:scale-110 transition-transform flex items-center space-x-2 text-orange dark:text-gray-400 border border-orange rounded-full px-2 py-2"
-                                    >
-                                        <svg
-                                            role="img"
-                                            width="24"
-                                            height="24"
-                                            className="w-5 h-5"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <title>Twitter</title>
-                                            <path d="M23.643 4.937c-.88.389-1.83.652-2.83.772 1.018-.61 1.798-1.575 2.165-2.722-.951.563-2.003.974-3.12 1.195-.894-.954-2.173-1.544-3.587-1.544-2.716 0-4.92 2.194-4.92 4.92 0 .385.043.76.128 1.117-4.092-.205-7.72-2.165-10.14-5.146-.425.725-.669 1.56-.669 2.46 0 1.7.87 3.2 2.188 4.085-.805-.026-1.562-.247-2.223-.616v.061c0 2.374 1.687 4.357 3.928 4.804-.412.111-.847.171-1.292.171-.316 0-.624-.031-.927-.088.625 1.953 2.448 3.374 4.603 3.415-1.68 1.317-3.803 2.1-6.1 2.1-.396 0-.787-.023-1.174-.068 2.178 1.396 4.767 2.21 7.54 2.21 9.043 0 14.002-7.493 14.002-13.986 0-.213-.005-.425-.015-.636.962-.696 1.796-1.562 2.45-2.548z" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div> */}
                             <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500 ">
                                 <a
                                     href="https://twitter.com/web3templates"
@@ -136,31 +79,31 @@ export const Hero = () => {
                         </div>
 
                         {/* <Benefit /> */}
-                        <div className="flex items-center justify-evenly w-full  border bg-orange rounded-3xl p-5 md:p-8 lg:p-10 mt-5 text-center">
-                            <p className="flex flex-col items-center justify-center text-2xl md:text-4xl lg:text-5xl font-bold text-white">
+                        <div className="flex items-center justify-evenly w-full  border bg-orange rounded-lg p-2 md:p-4 lg:p-6 mt-8 text-center">
+                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white">
                                 27k+
-                                <span className="block text-base md:text-xl lg:text-2xl">
+                                <span className="block text-sm lg:text-lg font-normal">
                                     Art Works
                                 </span>
                             </p>
 
-                            <p className="flex flex-col items-center justify-center text-2xl md:text-4xl lg:text-5xl font-bold text-white px-5 md:px-7 lg:px-9">
+                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white px-5 md:px-7 lg:px-9">
                                 27k+
-                                <span className="block text-base md:text-xl lg:text-2xl">
+                                <span className="block text-sm lg:text-lg font-normal ">
                                     Art Works
                                 </span>
                             </p>
 
-                            <p className="flex flex-col items-center justify-center text-2xl md:text-4xl lg:text-5xl font-bold text-white">
+                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white">
                                 27k+
-                                <span className="block text-base md:text-xl lg:text-2xl">
+                                <span className="block text-sm lg:text-lg font-normal">
                                     Art Works
                                 </span>
                             </p>
                         </div>
 
                         {/* Testimonials */}
-                        <div className="mt-7 flex justify-between">
+                        {/* <div className="mt-7 flex justify-between">
                             <div className="flex  items-center justify-center gap-2 md:gap-5">
                                 <svg
                                     className="w-4 h-4 md:w-8 md:h-8 text-orange"
@@ -223,15 +166,15 @@ export const Hero = () => {
                                     </span>
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="flex items-center justify-center w-full lg:w-1/2">
                     <div className="">
                         <Image
                             src={heroImg}
-                            width="616"
-                            height="617"
+                            width="450"
+                            height="450"
                             className={'object-cover'}
                             alt="Hero Illustration"
                             loading="eager"
