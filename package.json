@@ -21,6 +21,7 @@
   "author": "Surjith S M",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.11.10",
     "@apollo/experimental-nextjs-app-support": "^0.11.6",
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.1.3",

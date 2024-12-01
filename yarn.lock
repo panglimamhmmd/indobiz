@@ -14,7 +14,7 @@
   dependencies:
     ts-invariant "^0.10.3"
 
-"@apollo/client@^3.10.4":
+"@apollo/client@^3.10.4", "@apollo/client@^3.11.10":
   version "3.11.10"
   resolved "https://registry.npmjs.org/@apollo/client/-/client-3.11.10.tgz"
   integrity sha512-IfGc+X4il0rDqVQBBWdxIKM+ciDCiDzBq9+Bg9z4tJMi87uF6po4v+ddiac1wP0ARgVPsFwEIGxK7jhN4pW8jg==
