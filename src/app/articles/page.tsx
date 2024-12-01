@@ -1,208 +1,187 @@
 import React from 'react';
 import { Container } from '@/components/Container';
-import { gql, wpApolloClient } from '@/app/services/AppoloClient';
 import Link from 'next/link';
 import Image from 'next/image';
-const Articles = async () => {
-    const GET_LATEST_POSTs = gql`
-        query GetLatestPosts($first: Int, $after: String) {
-            posts(first: $first, after: $after) {
-                edges {
-                    node {
-                        id
-                        title
-                        excerpt
-                        date
-                        slug
-                        featuredImage {
-                            node {
-                                sourceUrl
-                            }
-                        }
-                        content
-                        author {
-                            node {
-                                name
-                                description
-                                avatar {
-                                    url
-                                }
-                            }
-                        }
-                    }
-                }
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
-            }
-        }
-    `;
+import {
+    calculateReadingTime,
+    sanitizeExcerpt,
+    formatDate,
+} from '@/middleware/ArticleHandling';
 
-    const { data } = await wpApolloClient.query({
-        // fetchPolicy: 'no-cache',
-        query: GET_LATEST_POSTs,
+import { getClient } from '@/middleware/AppoloClient';
+import { GET_LATEST_POSTS } from '@/middleware/GraphqlQuery';
+
+export default async function Articles() {
+    const { data } = await getClient().query({
+        query: GET_LATEST_POSTS,
         variables: { first: 10, after: null },
     });
-
-    const articles = data.posts.edges.map(({ node }: any) => ({
-        id: node.id,
-        title: node.title,
-        excerpt: node.excerpt,
-        date: new Date(node.date).toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-        }),
-        slug: node.slug,
-        image: node.featuredImage.node.sourceUrl,
-        author: node.author.node.name,
-        author_image: node.author.node.avatar.url, // Use optional chaining
-        content: node.content,
-    }));
-
-    console.log(articles);
-
-    const sanitizeExcerpt = (
-        excerpt: string | undefined,
-        maxSentences: number = 2
-    ): string => {
-        if (!excerpt) return '';
-
-        // Remove HTML tags and replace special characters
-        const cleanExcerpt = excerpt
-            .replace(/<\/?[^>]+(>|$)/g, '')
-            .replace(/&hellip;/g, '...');
-
-        // Split the excerpt into sentences and slice based on the maxSentences limit
-        const sentences = cleanExcerpt.split(/(?<=[.!?])\s+/); // Split by sentence-ending punctuation
-        const result = sentences.slice(0, maxSentences).join(' '); // Join the selected sentences
-
-        // Add '...' at the end if the number of sentences exceeds maxSentences
-        return sentences.length > maxSentences ? result + '...' : result;
-    };
-
-    const calculateReadingTime = (text: string | undefined): string => {
-        if (!text) return '0 min';
-
-        // Remove HTML tags and count the number of words
-        const cleanText = text
-            .replace(/<\/?[^>]+(>|$)/g, '')
-            .replace(/&hellip;/g, '...');
-        const wordCount = cleanText.split(/\s+/).length;
-
-        // Average reading speed (words per minute)
-        const wordsPerMinute = 200;
-
-        // Calculate reading time
-        const minutes = Math.ceil(wordCount / wordsPerMinute);
-
-        return `${minutes} min`;
-    };
-
+    const articles = data.posts.edges;
     return (
         <Container>
             <div id="Header">
-                <h1 className="text-center font-bold text-4xl">Articles</h1>
+                <h1 className="text-center font-bold text-4xl">
+                    Latest <span className="text-orange">Articles</span>
+                </h1>
             </div>
-
-            <>
-                {articles.map((article: any) => (
-                    <>
-                        <div
-                            className="bg-[#fff] dark:bg-gray-100 dark:text-gray-900 rounded-lg "
-                            key={article.id}
+            <div>
+                <section className="dark:bg-gray-100 dark:text-gray-800">
+                    <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
+                        <a
+                            rel="noopener noreferrer"
+                            href="#"
+                            className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50"
                         >
-                            <div className="container grid grid-cols-12 mx-auto dark:bg-gray-50 my-4">
-                                <div
-                                    className="bg-no-repeat bg-cover dark:bg-gray-300 col-span-full lg:col-span-4"
-                                    style={{
-                                        backgroundImage: `url(${article.image})`,
-                                        backgroundPosition: 'center center',
-                                        backgroundBlendMode: 'multiply',
-                                        backgroundSize: 'cover',
-                                    }}
-                                ></div>
-
-                                <div className="flex flex-col p-6 col-span-full row-span-full lg:col-span-8 lg:p-10">
-                                    <div className="flex justify-start">
-                                        <span className=" py-1 text-xs rounded-full dark:bg-red-600 dark:text-gray-50">
-                                            {article.date}
-                                        </span>
-                                    </div>
-                                    <a
-                                        href={`/articles/${article.slug}`}
-                                        className="text-3xl font-semibold"
-                                    >
-                                        {article.title}
-                                    </a>
-                                    <p className="flex-1 pt-2">
-                                        {sanitizeExcerpt(article.excerpt)}
-                                    </p>
-                                    <Link
-                                        rel="noopener noreferrer"
-                                        href={`/articles/${article.slug}`}
-                                        className="inline-flex items-center pt-2 pb-6 space-x-2 text-sm dark:text-red-600"
-                                    >
-                                        <Link
-                                            href={`/articles/${article.slug}`}
-                                        >
-                                            Read more
-                                        </Link>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            className="w-4 h-4"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                clipRule="evenodd"
-                                            ></path>
-                                        </svg>
-                                    </Link>
-                                    <div className="flex items-center justify-between pt-2">
-                                        <div className="flex space-x-2">
-                                            <Image
-                                                src={article.author_image}
-                                                width={30}
-                                                height={30}
-                                                alt="Avatar"
-                                                className="rounded-full"
-                                            />
-
-                                            {/* <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                className="w-5 h-5 dark:text-gray-600"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                                    clipRule="evenodd"
-                                                ></path>
-                                            </svg> */}
-                                            <span className="self-center text-sm">
-                                                by {article.author}
-                                            </span>
-                                        </div>
-                                        <span className="text-xs">
-                                            {calculateReadingTime(
-                                                article.content
-                                            )}{' '}
-                                            read
-                                        </span>
-                                    </div>
-                                </div>
+                            <Image
+                                src={
+                                    articles[0].node.featuredImage.node
+                                        .sourceUrl
+                                }
+                                alt=""
+                                className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500"
+                                width={500}
+                                height={500}
+                            />
+                            <div className="p-6 space-y-2 lg:col-span-5">
+                                <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">
+                                    {articles[0].node.title}
+                                </h3>
+                                <span className="text-xs dark:text-gray-600">
+                                    {formatDate(articles[0].node.date)}
+                                </span>
+                                <p>
+                                    {sanitizeExcerpt(articles[0].node.excerpt)}
+                                </p>
                             </div>
+                        </a>
+                        <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            {articles.slice(1, 6).map((article: any) => (
+                                <Link
+                                    rel="noopener noreferrer"
+                                    href={`/articles/${article.node.slug}`}
+                                    className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50"
+                                    key={article.node.id}
+                                >
+                                    <Image
+                                        role="presentation"
+                                        className="object-cover w-full rounded h-44 dark:bg-gray-500"
+                                        src={
+                                            article.node.featuredImage.node
+                                                .sourceUrl
+                                        }
+                                        width={200}
+                                        height={200}
+                                        alt={article.node.title}
+                                    />
+                                    <div className="p-6 space-y-2">
+                                        <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
+                                            {article.node.title}
+                                        </h3>
+                                        <span className="text-xs dark:text-gray-600">
+                                            {formatDate(article.node.date)}
+                                        </span>
+                                        <p>
+                                            {sanitizeExcerpt(
+                                                article.node.excerpt
+                                            )}
+                                        </p>
+                                    </div>
+                                </Link>
+                            ))}
                         </div>
-                    </>
-                ))}
-            </>
+                        <div className="flex justify-center">
+                            <button
+                                type="button"
+                                className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-50 dark:text-gray-600"
+                            >
+                                Load more posts...
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </Container>
     );
-};
+}
 
-export default Articles;
+{
+    /* {articles.map((article: any) => (
+                    <div
+                        key={article.node.id}
+                        className="group transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-transparent"
+                    >
+                        <div className="relative">
+                            <div
+                                className="h-56 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                                style={{
+                                    backgroundImage: `url(${article.node.featuredImage.node.sourceUrl})`,
+                                    backgroundBlendMode: 'multiply',
+                                }}
+                            >
+                                <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                                    {article.node.date}
+                                </div>
+                            </div>
+
+                            <div className="p-6 space-y-3">
+                                <Link
+                                    href={`/articles/${article.node.slug}`}
+                                    className="block text-xl font-bold text-gray-800 dark:text-white hover:text-red-600 transition-colors duration-300"
+                                >
+                                    {article.node.title}
+                                </Link>
+
+                                <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
+                                    {sanitizeExcerpt(article.node.excerpt)}
+                                </p>
+
+                                <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div className="flex items-center space-x-3">
+                                        <Image
+                                            src={
+                                                article.node.author.node.avatar
+                                                    .url
+                                            }
+                                            alt={`${article.node.author.node.name}'s avatar`}
+                                            width={40}
+                                            height={40}
+                                            className="rounded-full border-2 border-white dark:border-gray-700"
+                                        />
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                                                {article.node.author.node.name}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                                        {calculateReadingTime(
+                                            article.node.content
+                                        )}{' '}
+                                        read
+                                    </div>
+                                </div>
+
+                                <Link
+                                    href={`/articles/${article.node.slug}`}
+                                    className="inline-flex items-center text-red-600 hover:text-red-800 font-semibold transition-colors duration-300 group/link"
+                                >
+                                    Read more
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        className="w-5 h-5 ml-2 group-hover/link:translate-x-1 transition-transform"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                ))} */
+}

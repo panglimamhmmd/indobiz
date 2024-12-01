@@ -1,24 +1,20 @@
 import { Container } from '@/components/Container';
 import { Hero } from '@/components/Hero';
-import { SectionTitle } from '@/components/SectionTitle';
-import { Benefits } from '@/components/Benefits';
-import { Video } from '@/components/Video';
-import { Testimonials } from '@/components/Testimonials';
-import { Faq } from '@/components/Faq';
+import { InfiniteLoop } from '@/components/Testimonials';
 import { Cta } from '@/components/Cta';
-import { InfiniteLoop } from '@/components/InfiniteLoop';
 import { Articles } from '@/components/ArticleSection';
-import { benefitOne, benefitTwo } from '@/components/data';
-import Cards from '../components/Home';
 import Services from '../components/Services';
 export default function Home() {
     return (
         <>
             <Hero />
-
-            <Services />
+            <Container>
+                <Services />
+            </Container>
             {/* client side rendering */}
-            <InfiniteLoop />
+            <Container>
+                <InfiniteLoop />
+            </Container>
             {/* client side rendering */}
             <Container>
                 <Articles />

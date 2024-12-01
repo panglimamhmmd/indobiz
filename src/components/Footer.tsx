@@ -16,15 +16,9 @@ export function Footer() {
                             <Link href="/">
                                 <span className="flex items-center space-x-2 text-2xl font-medium text-black dark:text-white">
                                     <span>
-                                        <Image
-                                            src="/img/logo.svg"
-                                            width="32"
-                                            alt="N"
-                                            height="32"
-                                            className="w-8"
-                                        />
+                                        Indo
+                                        <span className="text-orange">Biz</span>
                                     </span>
-                                    <span>Indobiz</span>
                                 </span>
                             </Link>
                         </div>
@@ -104,7 +98,7 @@ export function Footer() {
                 </div>
 
                 <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
-                    Copyright © {new Date().getFullYear()}. Made with
+                    Copyright © {new Date().getFullYear()}. All Rights Reserved
                 </div>
             </Container>
             {/* Do not remove this */}

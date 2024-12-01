@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
 import './globals.css';
 
 import { Navbar } from '@/components/Navbar';
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
     title: 'Indobiz - Your Legal Partner',
     description: 'Your legal partner',
 };
-
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -22,12 +20,10 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={inter.className}>
-                {/* <ThemeProvider attribute="class"> */}
                 <Navbar />
                 <div>{children}</div>
                 <Footer />
                 <PopupWidget />
-                {/* </ThemeProvider> */}
             </body>
         </html>
     );

@@ -1,146 +1,100 @@
 import React from 'react';
 import Image from 'next/image';
-
-import { gql, wpApolloClient } from '../app/services/AppoloClient';
 import Link from 'next/link';
+import { getClient } from '@/middleware/AppoloClient';
+import { GET_LATEST_4_POSTS } from '../middleware/GraphqlQuery';
 
-const GET_PAGE_CONTENT = gql`
-    {
-        posts {
-            nodes {
-                id
-                slug
-                title
-                content
-                date
-                author {
-                    node {
-                        name
-                    }
-                }
-                categories {
-                    nodes {
-                        name
-                    }
-                }
-                featuredImage {
-                    node {
-                        sourceUrl
-                    }
-                }
-            }
-        }
-    }
-`;
-
-interface Article {
-    id: string;
-    slug: string;
-    date: string;
-    title: string;
-    author: {
-        node: {
-            name: string;
-        };
-    };
-    categories: {
-        nodes: { name: string }[];
-    };
-    featuredImage: {
-        node: {
-            sourceUrl: string;
-        };
-    };
-}
+import {
+    calculateReadingTime,
+    sanitizeExcerpt,
+} from '@/middleware/ArticleHandling';
 
 export const Articles = async () => {
-    // Fetch data from WordPress GraphQL
-    const { data } = await wpApolloClient.query({
-        // fetchPolicy: 'no-cache',
-        query: GET_PAGE_CONTENT,
-    });
-
-    const articles: Article[] = data.posts.nodes;
+    const { data } = await getClient().query({ query: GET_LATEST_4_POSTS });
 
     return (
         <div>
-            <section className="py-6 lg:py-12 dark:bg-gray-100 dark:text-gray-800">
-                <div className="container p-6 mx-auto space-y-8">
-                    <div className="space-y-2 text-center">
-                        <h1 className="text-center text-4xl">Articles</h1>
+            <section id="articles" className="py-20 bg-gray-50">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-3xl mx-auto text-center mb-16">
+                        <h1 className="text-4xl font-bold text-gray-900 mb-6">
+                            Latest <span className="text-orange">Articles</span>
+                        </h1>
+                        <p className="text-gray-600 text-lg">
+                            Berita dan Wawasan dari Dunia Legalitas Bisnis
+                        </p>
                     </div>
-                    <div id="latest" className="">
-                        <div className="py-4">
-                            <p className="text-lg text-[#4b5563] ">
-                                Latest Articles
-                            </p>
-                        </div>
-                        <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
-                            {articles.slice(0, 4).map((article) => (
-                                <>
-                                    <article className="flex flex-col dark:bg-gray-50 bg-[#fff] p-2 rounded-lg  ">
-                                        <a
-                                            rel="noopener noreferrer"
-                                            href="#"
-                                            aria-label="Te nulla oportere reprimique his dolorum"
-                                        >
-                                            <Image
-                                                alt=""
-                                                className="object-cover w-full h-52 dark:bg-gray-500 "
-                                                src={
-                                                    article.featuredImage?.node
-                                                        .sourceUrl ||
-                                                    '/img/default.jpg'
-                                                }
-                                                width={500}
-                                                height={500}
-                                            />
-                                        </a>
-                                        <div className="flex flex-col flex-1 p-2">
-                                            <a
-                                                rel="noopener noreferrer"
-                                                href="#"
-                                                className="mt-2 text-xs "
-                                                aria-label="Te nulla oportere reprimique his dolorum"
-                                            ></a>
-                                            <a
-                                                rel="noopener noreferrer"
-                                                href="#"
-                                                className="text-xs tracking-wider uppercase hover:underline dark:text-violet-600"
-                                            >
-                                                Convenire
-                                            </a>
-                                            <Link
-                                                href={`/articles/${article.slug}`}
-                                                className="flex-1 py-2 text-lg font-semibold leading-snug"
-                                            >
-                                                {article.title}
-                                            </Link>
-                                            <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-600">
-                                                {/* <span>
-                                                    {article.author.node.name}
-                                                </span>
-                                                <span>{article.date}</span> */}
-                                            </div>
-                                            <Link
-                                                href={`/articles/${article.slug}`}
-                                                className="btn w-full bg-orange text-white rounded-lg text-lg py-1 text-center hover:bg-yellow-400"
-                                            >
-                                                Read More
-                                            </Link>
-                                        </div>
-                                    </article>
-                                </>
-                            ))}
-                        </div>
-                        <div className="py-4 text-right">
-                            <a
-                                href="#"
-                                className="text-lg text-[#4b5563] hover:text-orange"
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {/* article cards */}
+
+                        {data.posts.nodes.map((article: any) => (
+                            <article
+                                key={article.id}
+                                className="bg-[#fff] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group"
                             >
-                                More Articles {'>>>'}
-                            </a>
-                        </div>
+                                <div className="relative overflow-hidden">
+                                    <Image
+                                        src={
+                                            article.featuredImage?.node
+                                                .sourceUrl || '/img/default.jpg'
+                                        }
+                                        alt={article.title.split(' ')[0]}
+                                        width={400}
+                                        height={300}
+                                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                                    />
+                                    <div className="absolute top-4 left-4">
+                                        <span className="inline-block bg-orange text-white text-sm px-3 py-1 rounded-full">
+                                            {article.categories.nodes[0]
+                                                ?.name || 'Category'}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="text-sm text-gray-500 mb-2">
+                                        {`${calculateReadingTime(
+                                            article.content
+                                        )} read`}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                                        {article.title}
+                                    </h3>
+                                    <p className="text-gray-600 mb-4">
+                                        {sanitizeExcerpt(article.excerpt) ||
+                                            'Summary of the article goes here...'}
+                                    </p>
+                                    <Link
+                                        href={`/articles/${article.slug}`}
+                                        className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                    >
+                                        Read More
+                                        <svg
+                                            className="w-4 h-4 ml-2"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M9 5l7 7-7 7"
+                                            />
+                                        </svg>
+                                    </Link>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+
+                    <div className="py-4 text-right">
+                        <a
+                            href="#"
+                            className="text-lg text-gray-600 hover:text-orange-500"
+                        >
+                            More Articles {'>>>'}
+                        </a>
                     </div>
                 </div>
             </section>

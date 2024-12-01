@@ -1,21 +1,16 @@
 import Image from 'next/image';
 import { Container } from '@/components/Container';
-import heroImg from '../../public/img/hero.png';
+import heroImg from '../../public/img/heroimage.jpeg';
 export const Hero = () => {
-    const stats = [
-        { id: 1, name: 'Transactions every 24 hours', value: '44 million' },
-        { id: 2, name: 'Assets under holding', value: '$119 trillion' },
-        { id: 3, name: 'New users annually', value: '46,000' },
-    ];
     return (
         <>
             <Container className="flex flex-wrap ">
                 <div className="flex items-center w-full lg:w-1/2">
                     <div className="max-w-2xl mb-8">
                         <h1 className="text-4xl font-bold leading-   tracking-tight text-black lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-                            Indobiz: Solusi Jasa Legalitas Terpercaya
+                            Solusi Jasa Legalitas Terpercaya
                         </h1>
-                        <p className="py-10 text-base leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
+                        <p className="py-5 text-base leading-normal text-gray-500 text-md lg:text-xl  dark:text-gray-300">
                             Indobiz hadir untuk memberikan solusi legalitas yang
                             menyeluruh bagi pengusaha dan perusahaan, memastikan
                             bahwa setiap langkah bisnis Anda berjalan sesuai
@@ -79,103 +74,37 @@ export const Hero = () => {
                         </div>
 
                         {/* <Benefit /> */}
-                        <div className="flex items-center justify-evenly w-full  border bg-orange rounded-lg p-2 md:p-4 lg:p-6 mt-8 text-center">
-                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white">
-                                27k+
-                                <span className="block text-sm lg:text-lg font-normal">
-                                    Art Works
+                        <div className="flex items-center justify-evenly w-full  border bg-orange rounded-lg p-2 md:p-4 lg:p-6 mt-5 text-center">
+                            <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
+                                27k+ Cases
+                                <span className="block text-sm lg:text-lg font-normal no-wrap">
+                                    Successful Cases
                                 </span>
                             </p>
 
-                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white px-5 md:px-7 lg:px-9">
-                                27k+
+                            <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white px-5 md:px-7 lg:px-9">
+                                10+ Years
                                 <span className="block text-sm lg:text-lg font-normal ">
-                                    Art Works
+                                    Year Experience
                                 </span>
                             </p>
 
-                            <p className="flex flex-col items-center justify-center text-xl md:text-4xl lg:text-5xl font-bold text-white">
-                                27k+
+                            <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
+                                500+ Clients
                                 <span className="block text-sm lg:text-lg font-normal">
-                                    Art Works
+                                    Satisfied Clients
                                 </span>
                             </p>
                         </div>
-
-                        {/* Testimonials */}
-                        {/* <div className="mt-7 flex justify-between">
-                            <div className="flex  items-center justify-center gap-2 md:gap-5">
-                                <svg
-                                    className="w-4 h-4 md:w-8 md:h-8 text-orange"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
-                                <svg
-                                    className="w-4 h-4 md:w-8 md:h-8 text-orange"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
-                                <svg
-                                    className="w-4 h-4 md:w-8 md:h-8 text-orange"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
-                                <svg
-                                    className="w-4 h-4 md:w-8 md:h-8 text-orange"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
-                                <svg
-                                    className="w-4 h-4 md:w-8 md:h-8 text-orange"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 22 20"
-                                >
-                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                </svg>
-                            </div>
-
-                            <div className="flex gap-5">
-                                <p className="flex flex-col items-center justify-center text-xl md:text-3xl font-bold text-black      ">
-                                    100+
-                                    <span className="display-block text-base md:text-lg text-center justify-normal">
-                                        Projects Completed
-                                    </span>
-                                </p>
-                                <p className="flex flex-col items-center justify-center text-xl md:text-3xl font-bold text-black       ">
-                                    47k+
-                                    <span className="display-block text-base md:text-lg text-center justify-normal">
-                                        Happy Clients
-                                    </span>
-                                </p>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
-                <div className="flex items-center justify-center w-full lg:w-1/2">
-                    <div className="">
+                <div className="flex items-center justify-center w-full xl:w-1/2">
+                    <div className="xl:pl-10">
                         <Image
                             src={heroImg}
-                            width="450"
-                            height="450"
-                            className={'object-cover'}
+                            width="720"
+                            height="720"
+                            className={'object-cover rounded-lg'}
                             alt="Hero Illustration"
                             loading="eager"
                             placeholder="blur"
