@@ -23,7 +23,7 @@ export default function Home() {
                     Our Services
                 </h4>
                 {ServiceData.map((data) => (
-                    <>
+                    <div key={data.title}>
                         <div>
                             <div className="group relative flex overflow-hidden flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg  max-w-xs md:max-w-3xl mx-auto border border-white bg-white mb-10 hover:shadow-xl">
                                 <div className=" h-48 md:h-full md:w-1/3 bg-white">
@@ -97,7 +97,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 ))}
             </div>
         </Container>

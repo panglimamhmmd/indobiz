@@ -45,21 +45,6 @@ const data2 = [
     { image: userOneImg, name: 'Lina Hartini', title: 'Akta Notaris' },
 ];
 
-const data3 = [
-    { image: userOneImg, name: 'Eka Prasetya', title: 'Pembuatan PT' },
-    {
-        image: userTwoImg,
-        name: 'Dian Permata',
-        title: 'Pendirian Yayasan',
-    },
-    {
-        image: userThreeImg,
-        name: 'Andi Setiawan',
-        title: 'Perjanjian Kerjasama',
-    },
-    { image: userOneImg, name: 'Nina Fitria', title: 'Akta Notaris' },
-];
-
 const InfiniteLooper = function InfiniteLooper({
     speed,
     direction,

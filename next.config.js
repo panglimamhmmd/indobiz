@@ -13,11 +13,27 @@ const nextConfig = {
         GRAPHQL_API_URL: process.env.GRAPHQL_API_URL,
     },
     images: {
-        domains: [
-            'panglimamuhammad.me',
-            'source.unsplash.com',
-            'secure.gravatar.com',
-            'images.pexels.com',
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'panglimamuhammad.me',
+                pathname: '**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'source.unsplash.com',
+                pathname: '**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'secure.gravatar.com',
+                pathname: '**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.pexels.com',
+                pathname: '**',
+            },
         ], // Add your domain here
     },
 };
