@@ -17,6 +17,7 @@ const nextConfig = {
             'panglimamuhammad.me',
             'source.unsplash.com',
             'secure.gravatar.com',
+            'images.pexels.com',
         ], // Add your domain here
     },
 };

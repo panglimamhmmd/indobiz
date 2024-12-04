@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ThemeChanger from './DarkSwitch';
 import Image from 'next/image';
 import { Disclosure } from '@headlessui/react';
+import { WhatsappRedirect } from '@/middleware/Redirect';
 
 export const Navbar = () => {
     const navigation = ['Home', 'Services', 'Articles'];
@@ -33,7 +34,8 @@ export const Navbar = () => {
                     <div className="hidden mr-3 lg:flex nav__item">
                         <Link
                             href="/"
-                            className="px-6 py-2 text-md text-white font-bold bg-orange rounded-lg md:ml-5 flex gap-3 items-center"
+                            onClick={WhatsappRedirect}
+                            className="px-6 py-2 text-md text-white font-bold bg-orange rounded-lg md:ml-5 flex gap-3 items-center transition-all duration-200 hover:bg-black hover:shadow-lg"
                         >
                             Konsultasi Sekarang
                             <svg

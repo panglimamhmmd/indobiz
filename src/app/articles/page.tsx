@@ -27,10 +27,10 @@ export default async function Articles() {
             <div>
                 <section className="dark:bg-gray-100 dark:text-gray-800">
                     <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
-                        <a
+                        <Link
                             rel="noopener noreferrer"
-                            href="#"
-                            className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50"
+                            href={`/articles/${articles[0].node.slug}`}
+                            className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-[#fff]"
                         >
                             <Image
                                 src={
@@ -52,14 +52,21 @@ export default async function Articles() {
                                 <p>
                                     {sanitizeExcerpt(articles[0].node.excerpt)}
                                 </p>
+                                <Link
+                                    className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                    href={`/articles/${articles[0].node.slug}`}
+                                >
+                                    Read More
+                                </Link>
                             </div>
-                        </a>
+                        </Link>
                         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {articles.slice(1, 6).map((article: any) => (
                                 <Link
                                     rel="noopener noreferrer"
                                     href={`/articles/${article.node.slug}`}
-                                    className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-50"
+                                    className="max-w-sm mx-auto group hover:no-underline focus:no-underline 
+                                    rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow "
                                     key={article.node.id}
                                 >
                                     <Image
@@ -85,6 +92,13 @@ export default async function Articles() {
                                                 article.node.excerpt
                                             )}
                                         </p>
+
+                                        <Link
+                                            className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                            href={`/articles/${article.node.slug}`}
+                                        >
+                                            Read More
+                                        </Link>
                                     </div>
                                 </Link>
                             ))}

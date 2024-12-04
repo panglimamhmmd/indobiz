@@ -1,5 +1,8 @@
 import type { Config } from "tailwindcss";
-
+import {
+  scopedPreflightStyles,
+  isolateOutsideOfContainer,
+} from 'tailwindcss-scoped-preflight';
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
@@ -28,6 +31,10 @@ const config: Config = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    scopedPreflightStyles({
+      isolationStrategy: isolateOutsideOfContainer(['.blog-content']),
+    }),
+  ],
 };
 export default config;

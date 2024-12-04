@@ -159,7 +159,7 @@ export const InfiniteLoop = () => (
             {data1.map((item, index) => (
                 <div
                     key={index}
-                    className="flex bg-[#fff] mx-2 pr-4 lg:pr-0 w-auto lg:w-80 rounded-2xl items-center mt-6 shadow-lg hover:shadow-xl  duration-300 transform hover:-translate-y-1 transition-transform"
+                    className="flex bg-[#fff] mx-2 pr-4 lg:pr-0 w-auto lg:w-80 rounded-xl items-center mt-6 shadow-lg hover:shadow-xl  duration-300 transform hover:-translate-y-1 transition-transform"
                 >
                     <div className="p-3">
                         <Image

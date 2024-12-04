@@ -27,9 +27,11 @@ const Cards = ({ cards }: Props) => {
                 {cards.map((card) => (
                     <div key={card.id} className="flex-none w-64 snap-center">
                         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden mb-4">
-                            <img
+                            <Image
                                 src={card.image}
                                 alt={card.title}
+                                width={100}
+                                height={100}
                                 className="w-full h-40 object-cover"
                             />
                             <div className="p-4">

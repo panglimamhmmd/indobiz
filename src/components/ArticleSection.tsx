@@ -10,11 +10,13 @@ import {
 } from '@/middleware/ArticleHandling';
 
 export const Articles = async () => {
+    try {
+    } catch (error) {}
     const { data } = await getClient().query({ query: GET_LATEST_4_POSTS });
 
     return (
         <div>
-            <section id="articles" className="py-20 bg-gray-50">
+            <section id="articles" className="pt-20 pb-5 ">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl mx-auto text-center mb-16">
                         <h1 className="text-4xl font-bold text-gray-900 mb-6">
@@ -91,7 +93,7 @@ export const Articles = async () => {
                     <div className="py-4 text-right">
                         <a
                             href="#"
-                            className="text-lg text-gray-600 hover:text-orange-500"
+                            className="text-lg text-gray-600 hover:text-orange"
                         >
                             More Articles {'>>>'}
                         </a>

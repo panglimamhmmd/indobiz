@@ -39,10 +39,12 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
                     height={400}
                 />
                 <br />
-                <div
-                    className="prose prose-lg prose-indigo"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
-                />
+                <div className="w-full mt-5">
+                    <div
+                        className="blog-content"
+                        dangerouslySetInnerHTML={{ __html: article.content }}
+                    ></div>
+                </div>
             </div>
             <div className="pt-12 border-t dark:border-gray-300">
                 <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">

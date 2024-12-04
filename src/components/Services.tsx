@@ -4,11 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
+import Link from 'next/link';
 
 import { FreeMode, Pagination } from 'swiper/modules';
-
-import { RxArrowTopRight } from 'react-icons/rx';
-
 import { ServiceData } from './constant';
 
 const Services = () => {
@@ -23,12 +21,17 @@ const Services = () => {
             <Swiper
                 breakpoints={{
                     340: {
-                        slidesPerView: 2,
+                        slidesPerView: 1.5,
                         spaceBetween: 30,
                     },
 
                     768: {
-                        slidesPerView: 4,
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+
+                    1024: {
+                        slidesPerView: 3,
                         spaceBetween: 30,
                     },
 
@@ -58,11 +61,14 @@ const Services = () => {
                                 role="img"
                                 aria-label={`Background for ${item.title}`}
                             />
-                            <item.icon className="hidden group-hover:block text-slate-50 w-[50px] h-[50px] relative top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
+                            {/* <item.icon className="hidden group-hover:block text-slate-50 w-[50px] h-[50px] relative top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" /> */}
 
                             <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-50 transition-opacity duration-300" />
 
-                            <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between  w-full px-5 pb-3 pt-6 bg-[#fff]">
+                            <Link
+                                href={'/services'}
+                                className="  absolute bottom-0 left-0 right-0 flex flex-row justify-between  w-full px-5 pb-3 pt-3 bg-[#fff]"
+                            >
                                 <div className="flex flex-col gap-2">
                                     <h1 className="text-lg lg:text-xl font-semibold">
                                         {item.title}
@@ -76,7 +82,7 @@ const Services = () => {
                                 </div>
 
                                 <div className="flex items-center"></div>
-                            </div>
+                            </Link>
                         </div>
                     </SwiperSlide>
                 ))}
