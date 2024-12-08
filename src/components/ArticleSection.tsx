@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getClient } from '@/middleware/AppoloClient';
@@ -7,6 +6,7 @@ import { GET_LATEST_4_POSTS } from '../middleware/GraphqlQuery';
 import {
     calculateReadingTime,
     sanitizeExcerpt,
+    truncateString,
 } from '@/middleware/ArticleHandling';
 
 export const Articles = async () => {
@@ -16,12 +16,12 @@ export const Articles = async () => {
             <div>
                 <section id="articles" className="pt-20 pb-10 ">
                     <div className="container mx-auto px-4">
-                        <div className="max-w-3xl mx-auto text-center mb-16">
+                        <div className="max-w-3xl mx-auto text-center mb-10">
                             <h1 className="text-4xl font-bold text-gray-900 mb-6">
                                 Latest{' '}
                                 <span className="text-orange">Articles</span>
                             </h1>
-                            <p className="text-gray-600 text-lg">
+                            <p className="text-gray-500 text-md">
                                 Berita dan Wawasan dari Dunia Legalitas Bisnis
                             </p>
                         </div>
@@ -59,16 +59,24 @@ export const Articles = async () => {
                                                 article.content
                                             )} read`}
                                         </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-3">
-                                            {article.title}
-                                        </h3>
-                                        <p className="text-gray-600 mb-4">
-                                            {sanitizeExcerpt(article.excerpt) ||
+                                        <Link
+                                            href={`/articles/${article.slug}`}
+                                            className="text-xl font-bold text-gray-900 "
+                                        >
+                                            {truncateString(article.title)}
+                                        </Link>
+                                        <p className="text-gray-600 my-3 ">
+                                            {sanitizeExcerpt(
+                                                truncateString(
+                                                    article.excerpt,
+                                                    75
+                                                )
+                                            ) ||
                                                 'Summary of the article goes here...'}
                                         </p>
                                         <Link
                                             href={`/articles/${article.slug}`}
-                                            className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                            className=" inline-flex items-center text-orange-500 font-medium group-hover:text-amber-400  transition-colors text-orange"
                                         >
                                             Read More
                                             <svg
@@ -91,12 +99,12 @@ export const Articles = async () => {
                         </div>
 
                         <div className="py-4 text-right">
-                            <a
-                                href="#"
+                            <Link
+                                href="/articles"
                                 className="text-lg text-gray-600 hover:text-orange"
                             >
                                 More Articles {'>>>'}
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
@@ -104,6 +112,7 @@ export const Articles = async () => {
         );
     } catch (error) {
         console.log('Terjadi Fetch Error', error);
+        return <h1 className="text-xl font-bold"> Articles Section</h1>;
     }
 };
 

@@ -3,9 +3,9 @@ import { Container } from '@/components/Container';
 
 export const Cta = () => {
     return (
-        <div className="flex flex-col items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-orange px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-lg">
+        <div className="flex flex-col items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-orange px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-2xl">
             <div className=" text-center lg:text-left">
-                <h2 className="text-2xl font-medium lg:text-3xl">
+                <h2 className="text-xl font-bold lg:text-3xl">
                     Mulai Proses Legalitas Perusahaan Anda Hari Ini
                 </h2>
                 {/* <p className="mt-2 font-medium text-white text-opacity-90 lg:text-xl">

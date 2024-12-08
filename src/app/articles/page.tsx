@@ -6,6 +6,7 @@ import {
     calculateReadingTime,
     sanitizeExcerpt,
     formatDate,
+    truncateString,
 } from '@/middleware/ArticleHandling';
 
 import { getClient } from '@/middleware/AppoloClient';
@@ -31,7 +32,7 @@ export default async function Articles() {
                             <Link
                                 rel="noopener noreferrer"
                                 href={`/articles/${articles[0].node.slug}`}
-                                className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-[#fff]"
+                                className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow bg-[#fff]"
                             >
                                 <Image
                                     src={
@@ -44,7 +45,7 @@ export default async function Articles() {
                                     height={500}
                                 />
                                 <div className="p-6 space-y-2 lg:col-span-5">
-                                    <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">
+                                    <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline ">
                                         {articles[0].node.title}
                                     </h3>
                                     <span className="text-xs dark:text-gray-600">
@@ -52,11 +53,12 @@ export default async function Articles() {
                                     </span>
                                     <p>
                                         {sanitizeExcerpt(
-                                            articles[0].node.excerpt
+                                            articles[0].node.excerpt,
+                                            2
                                         )}
                                     </p>
                                     <Link
-                                        className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                        className="group-hover:text-amber-400 inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
                                         href={`/articles/${articles[0].node.slug}`}
                                     >
                                         Read More
@@ -69,7 +71,7 @@ export default async function Articles() {
                                         rel="noopener noreferrer"
                                         href={`/articles/${article.node.slug}`}
                                         className="max-w-sm mx-auto group hover:no-underline focus:no-underline 
-                                        rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow "
+                                        rounded-2xl bg-[#fff] overflow-hidden shadow-lg hover:shadow-2xl transition-shadow "
                                         key={article.node.id}
                                     >
                                         <Image
@@ -85,19 +87,25 @@ export default async function Articles() {
                                         />
                                         <div className="p-6 space-y-2">
                                             <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
-                                                {article.node.title}
+                                                {truncateString(
+                                                    article.node.title,
+                                                    42
+                                                )}
                                             </h3>
                                             <span className="text-xs dark:text-gray-600">
                                                 {formatDate(article.node.date)}
                                             </span>
                                             <p>
                                                 {sanitizeExcerpt(
-                                                    article.node.excerpt
+                                                    truncateString(
+                                                        article.node.excerpt,
+                                                        80
+                                                    )
                                                 )}
                                             </p>
 
                                             <Link
-                                                className="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
+                                                className="group-hover:text-amber-400   inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition-colors text-orange"
                                                 href={`/articles/${article.node.slug}`}
                                             >
                                                 Read More
@@ -122,86 +130,4 @@ export default async function Articles() {
     } catch (error) {
         console.log('Terjadi Fetch Error', error);
     }
-}
-
-{
-    /* {articles.map((article: any) => (
-                    <div
-                        key={article.node.id}
-                        className="group transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-transparent"
-                    >
-                        <div className="relative">
-                            <div
-                                className="h-56 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
-                                style={{
-                                    backgroundImage: `url(${article.node.featuredImage.node.sourceUrl})`,
-                                    backgroundBlendMode: 'multiply',
-                                }}
-                            >
-                                <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                    {article.node.date}
-                                </div>
-                            </div>
-
-                            <div className="p-6 space-y-3">
-                                <Link
-                                    href={`/articles/${article.node.slug}`}
-                                    className="block text-xl font-bold text-gray-800 dark:text-white hover:text-red-600 transition-colors duration-300"
-                                >
-                                    {article.node.title}
-                                </Link>
-
-                                <p className="text-gray-600 dark:text-gray-300 line-clamp-3">
-                                    {sanitizeExcerpt(article.node.excerpt)}
-                                </p>
-
-                                <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
-                                    <div className="flex items-center space-x-3">
-                                        <Image
-                                            src={
-                                                article.node.author.node.avatar
-                                                    .url
-                                            }
-                                            alt={`${article.node.author.node.name}'s avatar`}
-                                            width={40}
-                                            height={40}
-                                            className="rounded-full border-2 border-white dark:border-gray-700"
-                                        />
-                                        <div>
-                                            <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                                                {article.node.author.node.name}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                                        {calculateReadingTime(
-                                            article.node.content
-                                        )}{' '}
-                                        read
-                                    </div>
-                                </div>
-
-                                <Link
-                                    href={`/articles/${article.node.slug}`}
-                                    className="inline-flex items-center text-red-600 hover:text-red-800 font-semibold transition-colors duration-300 group/link"
-                                >
-                                    Read more
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                        className="w-5 h-5 ml-2 group-hover/link:translate-x-1 transition-transform"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                            clipRule="evenodd"
-                                        ></path>
-                                    </svg>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                ))} */
 }

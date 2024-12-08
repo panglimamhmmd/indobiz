@@ -25,8 +25,8 @@ export default function Home() {
                 {ServiceData.map((data) => (
                     <div key={data.title}>
                         <div>
-                            <div className="group relative flex overflow-hidden flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg  max-w-xs md:max-w-3xl mx-auto border border-white bg-white mb-10 hover:shadow-xl">
-                                <div className=" h-48 md:h-full md:w-1/3 bg-white">
+                            <div className="group relative flex overflow-hidden flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg  max-w-xs md:max-w-3xl mx-auto border border-white bg-[#fff]  mb-10 hover:shadow-xl">
+                                <div className=" h-48 md:h-full md:w-1/3 ">
                                     <Image
                                         src={data.backgroundImage}
                                         alt={data.title}
@@ -35,7 +35,7 @@ export default function Home() {
                                         height={700}
                                     />
                                 </div>
-                                <div className="w-full md:w-2/3 bg-white flex flex-col space-y-4 p-3">
+                                <div className="w-full md:w-2/3 flex flex-col space-y-4 p-3">
                                     <div className="flex justify-between item-center">
                                         <p className="text-gray-500 font-medium hidden md:block">
                                             {data.type}

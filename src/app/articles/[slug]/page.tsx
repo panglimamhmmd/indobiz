@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { GET_POST_BY_SLUG } from '@/middleware/GraphqlQuery';
 import { getClient } from '@/middleware/AppoloClient';
+import { formatDate } from '@/middleware/ArticleHandling';
 
 async function ArticleDetails({ params }: { params: { slug: string } }) {
     try {
@@ -31,7 +32,7 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
                                 {article.author.node.name}
                             </span>
                         </a>{' '}
-                        on {article.date}
+                        on {formatDate(article.date)}
                     </p>
                 </div>
                 <div className="dark:text-gray-800">
@@ -51,7 +52,7 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
                         ></div>
                     </div>
                 </div>
-                <div className="pt-12 border-t dark:border-gray-300">
+                {/* <div className="pt-12 border-t dark:border-gray-300">
                     <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
                         <Image
                             src={article.author.node.avatar.url}
@@ -129,7 +130,7 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
                             </svg>
                         </a>
                     </div>
-                </div>
+                </div> */}
             </article>
         );
     } catch (e) {

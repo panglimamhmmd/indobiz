@@ -2,55 +2,42 @@ import Image from 'next/image';
 import { Container } from '@/components/Container';
 import heroImg from '../../public/img/heroimage.jpeg';
 import Link from 'next/link';
-import { RedirectButton } from '@/middleware/Redirect';
-import TrustedBy from './TrustedBy';
+import { RedirectButton } from '@/components/Redirect';
 
 export const Hero = () => {
     return (
         <>
             <Container className="flex flex-wrap ">
-                <div className="flex items-center w-full lg:w-1/2">
-                    <div className="max-w-2xl mb-8">
-                        <h1 className="text-4xl font-bold leading-tracking-tight text-black lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-                            Solusi Jasa Legalitas Terpercaya
+                <div className="flex items-center w-full mb-10  lg:w-1/2 lg:mb-0  ">
+                    <div className="max-w-2xl space-y-10 ">
+                        <h1 className="text-4xl font-bold leading-tracking-tight text-black lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight ">
+                            Solusi{' '}
+                            <span className="text-orange">Jasa Legalitas</span>{' '}
+                            Terpercaya
                         </h1>
-                        <p className="py-5 text-sm leading-normal text-gray-500 text-md lg:text-xl  dark:text-gray-300">
-                            Indobiz hadir untuk memberikan solusi legalitas yang
-                            menyeluruh bagi pengusaha dan perusahaan, memastikan
-                            bahwa setiap langkah bisnis Anda berjalan sesuai
-                            dengan hukum yang berlaku dan mendukung kesuksesan
-                            jangka panjang.
+                        <p className="text-sm leading-normal text-gray-500 text-md lg:text-xl">
+                            Indobiz menawarkan solusi legalitas terpadu bagi
+                            pengusaha dan perusahaan, memastikan setiap langkah
+                            bisnis sesuai hukum dan mendukung kesuksesan jangka
+                            panjang.
                         </p>
 
-                        <div className="flex flex-col space-y-5 sm:space-x-4 md:space-y-0 md:items-center md:flex-row ">
+                        <div className="flex space-y-5 space-x-4 sm:space-y-0 sm:items-center sm:flex-row ">
                             <div className="flex gap-1">
                                 <Link
                                     href="/services"
-                                    className="px-8 hover:scale-105 duration-300 text-sm content-center py-2 lg:text-lg font-bold text-center text-orange border-orange border-2 rounded-xl "
+                                    className="px-4 hover:text-amber-400 hover:border-amber-400 duration-300 text-sm content-center py-2 lg:text-lg font-bold text-center text-orange border-orange border-2 rounded-2xl "
                                 >
                                     Services
                                 </Link>
-                                {/* <div
-                                    onClick={handleRedirect}
-                                    className="px-8 text-nowrap hover:scale-105 transition-transform  content-center py-2 text-sm lg:text-lg font-bold text-center text-white bg-orange rounded-xl  "
-                                >
-                                    Konsultasi Sekarang
-                                </div> */}
                                 <RedirectButton />
                             </div>
-                            <div className="flex space-x-5 text-gray-400 dark:text-gray-500 ">
-                                <a
-                                    href="https://twitter.com/web3templates"
-                                    target="_blank"
-                                    rel="noopener"
-                                >
-                                    <span className="sr-only">Twitter</span>
-                                    <Twitter />
-                                </a>
+                            <div className="flex space-x-5  ">
                                 <a
                                     href="https://facebook.com/web3templates"
                                     target="_blank"
                                     rel="noopener"
+                                    className="text-gray-400 rounded-full hover:text-orange transition-transform "
                                 >
                                     <span className="sr-only">Facebook</span>
                                     <Facebook />
@@ -59,6 +46,7 @@ export const Hero = () => {
                                     href="https://instagram.com/web3templates"
                                     target="_blank"
                                     rel="noopener"
+                                    className="text-gray-400 rounded-full hover:text-orange transition-transform "
                                 >
                                     <span className="sr-only">Instagram</span>
                                     <Instagram />
@@ -67,6 +55,7 @@ export const Hero = () => {
                                     href="https://linkedin.com/"
                                     target="_blank"
                                     rel="noopener"
+                                    className="text-gray-400 rounded-full hover:text-orange transition-ease "
                                 >
                                     <span className="sr-only">Linkedin</span>
                                     <Linkedin />
@@ -75,23 +64,23 @@ export const Hero = () => {
                         </div>
 
                         {/* <Benefit /> */}
-                        <div className="flex items-center justify-evenly w-full  border bg-orange rounded-lg p-2 md:p-4 lg:p-6 mt-10 text-center">
-                            <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
-                                27k+ Cases
+                        <div className="flex items-center justify-evenly w-full shadow-xl bg-orange rounded-2xl text-center p-4">
+                            <p className=" flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
+                                27k+
                                 <span className="block text-sm lg:text-lg font-normal no-wrap">
                                     Successful Cases
                                 </span>
                             </p>
 
                             <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white px-5 md:px-7 lg:px-9">
-                                10+ Years
+                                10+
                                 <span className="block text-sm lg:text-lg font-normal ">
                                     Year Experience
                                 </span>
                             </p>
 
                             <p className="flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
-                                500+ Clients
+                                500+
                                 <span className="block text-sm lg:text-lg font-normal">
                                     Satisfied Clients
                                 </span>
@@ -113,7 +102,6 @@ export const Hero = () => {
                     </div>
                 </div>
             </Container>
-            <TrustedBy />
         </>
     );
 };

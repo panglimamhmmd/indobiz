@@ -3,7 +3,8 @@ import Link from 'next/link';
 import ThemeChanger from './DarkSwitch';
 import Image from 'next/image';
 import { Disclosure } from '@headlessui/react';
-import { WhatsappRedirect } from '@/middleware/Redirect';
+import { WhatsappRedirect } from '@/components/Redirect';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
     const navigation = ['Home', 'Services', 'Articles'];
@@ -11,18 +12,9 @@ export const Navbar = () => {
         <div className="w-full ">
             <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-center xl:px-1">
                 {/* Logo  */}
-                <Link href="/" className="lg:absolute left-0">
+                <Link href="/home" className="lg:absolute left-0">
                     <span className="flex items-center space-x-2 text-2xl font-medium text-black dark:text-white">
-                        <span>
-                            {/* <Image
-                                src="/img/logo.svg"
-                                width="32"
-                                alt="N"
-                                height="32"
-                                className="w-8"
-                            /> */}
-                        </span>
-                        <span className="font-bold">
+                        <span className="font-bold ">
                             Indo<span className="text-orange">Biz</span>
                         </span>
                     </span>
@@ -31,20 +23,21 @@ export const Navbar = () => {
                 {/* get started  */}
                 <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2 absolute right-0 ">
                     {/* <ThemeChanger /> */}
-                    <div className="hidden mr-3 lg:flex nav__item">
+                    <div className="hidden  lg:flex nav__item">
                         <Link
                             href="/"
                             onClick={WhatsappRedirect}
-                            className="px-6 py-2 text-md text-white font-bold bg-orange rounded-lg md:ml-5 flex gap-3 items-center transition-all duration-200 hover:bg-black hover:shadow-lg"
+                            className="px-4 py-2 text-md text-white font-semibold bg-orange rounded-2xl md:ml-5 flex gap-1 items-center transition-all duration-200 hover:bg-amber-400 hover:shadow-lg"
                         >
                             Konsultasi Sekarang
                             <svg
-                                width="24px"
-                                height="24px"
+                                width="20px"
+                                height="20px"
                                 viewBox="0 0 24.00 24.00"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 stroke="#ffffff"
+                                className="inline-block"
                                 transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)"
                             >
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -52,7 +45,7 @@ export const Navbar = () => {
                                     id="SVGRepo_tracerCarrier"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    stroke="#CCCCCC"
+                                    stroke="#ffffff"
                                     strokeWidth="0.192"
                                 ></g>
                                 <g id="SVGRepo_iconCarrier">

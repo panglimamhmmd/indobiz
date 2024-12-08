@@ -1,18 +1,15 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import React from 'react';
 import { Container } from '@/components/Container';
 
 export function Footer() {
     const navigation = ['Home', 'Services', 'Articles'];
-    const legal = ['Terms', 'Privacy', 'Legal'];
     return (
         <div className="relative">
             <Container>
-                <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
+                <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-4">
                     <div className="lg:col-span-2">
                         <div>
-                            {' '}
                             <Link href="/">
                                 <span className="flex items-center space-x-2 text-2xl font-medium text-black dark:text-white">
                                     <span>
@@ -24,11 +21,10 @@ export function Footer() {
                         </div>
 
                         <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-                            Indobiz hadir untuk memberikan solusi legalitas yang
-                            menyeluruh bagi pengusaha dan perusahaan, memastikan
-                            bahwa setiap langkah bisnis Anda berjalan sesuai
-                            dengan hukum yang berlaku dan mendukung kesuksesan
-                            jangka panjang.
+                            Indobiz menawarkan solusi legalitas terpadu bagi
+                            pengusaha dan perusahaan, memastikan setiap langkah
+                            bisnis sesuai hukum dan mendukung kesuksesan jangka
+                            panjang.
                         </div>
                     </div>
 
@@ -37,27 +33,19 @@ export function Footer() {
                             {navigation.map((item, index) => (
                                 <Link
                                     key={index}
-                                    href="/"
-                                    className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
+                                    href={
+                                        item === 'Home'
+                                            ? '/'
+                                            : `/${item.toLowerCase()}`
+                                    }
+                                    className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-orange focus:text-orange focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
                                 >
                                     {item}
                                 </Link>
                             ))}
                         </div>
                     </div>
-                    <div>
-                        <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-                            {legal.map((item, index) => (
-                                <Link
-                                    key={index}
-                                    href="/"
-                                    className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
+
                     <div className="">
                         <div>Follow us</div>
                         <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">

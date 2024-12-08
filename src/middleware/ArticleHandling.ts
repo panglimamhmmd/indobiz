@@ -1,6 +1,6 @@
 export const sanitizeExcerpt = (
     excerpt: string | undefined,
-    maxSentences: number = 1
+    maxSentences: number = 2
 ): string => {
     if (!excerpt) return '';
 
@@ -47,3 +47,12 @@ export const formatDate = (inputDate: string): string => {
   
     return date.toLocaleDateString('en-US', options).replace(',', '.'); // Replace comma with a period
   };
+
+
+  export const truncateString = (input: string, maxLength: number = 40): string =>  {
+    if (input.length > maxLength) {
+      return input.substring(0, maxLength - 3) + "...";
+    }
+    return input;
+  }
+  

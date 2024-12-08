@@ -67,21 +67,22 @@ const Services = () => {
 
                             <Link
                                 href={'/services'}
-                                className="  absolute bottom-0 left-0 right-0 flex flex-row justify-between  w-full px-5 pb-3 pt-3 bg-[#fff]"
+                                className="absolute bottom-0 left-0 right-0 flex flex-col justify-between  w-full "
                             >
-                                <div className="flex flex-col gap-2">
+                                <div className="bg-orange text-center font-semibold">
+                                    IDR 2.000.000
+                                </div>
+                                <div className="flex flex-col h-full gap-2 px-5 pb-5 pt-1 bg-[#fff]">
                                     <h1 className="text-lg lg:text-xl font-semibold">
                                         {item.title}
                                     </h1>
                                     <p className="text-xs text-zinc-600  ">
                                         {item.content}
                                     </p>
-                                    <p className=" text-xs font-base text-orange ">
+                                    <p className=" text-xs font-base text-orange group-hover:text-amber-400 ">
                                         Learn more {'>'}
                                     </p>
                                 </div>
-
-                                <div className="flex items-center"></div>
                             </Link>
                         </div>
                     </SwiperSlide>

@@ -12,7 +12,7 @@ export const RedirectButton = () => {
     return (
         <div
             onClick={WhatsappRedirect}
-            className="px-8 text-nowrap hover:scale-105 transition-transform  content-center py-2 text-sm lg:text-lg font-bold text-center text-white bg-orange rounded-xl cursor-pointer "
+            className="px-4 text-nowrap  content-center py-2 text-sm lg:text-lg font-bold text-center text-white bg-orange rounded-2xl cursor-pointer transition-transform duration-300 hover:bg-amber-400 hover:text-white "
         >
             Konsultasi Sekarang
         </div>

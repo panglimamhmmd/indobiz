@@ -1,49 +1,121 @@
-import React from 'react';
+'use client';
 import { Container } from './Container';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import userOneImg from '../../public/img/user1.jpg';
+import userTwoImg from '../../public/img/user2.jpg';
+import userThreeImg from '../../public/img/user3.jpg';
 import Image from 'next/image';
 
-const TrustedBy = () => {
-    return (
-        <Container>
-            <div className="flex flex-col justify-center">
-                {/* <div className="text-xl text-center text-gray-700 dark:text-white">
-            Trusted by{' '}
-            <span className="text-indigo-600">2000+</span> customers
-            worldwide
-        </div> */}
+import '@/styles/InfiniteLoop.css';
+const InfiniteLooper = function InfiniteLooper({
+    speed,
+    direction,
+    children,
+}: {
+    speed: number;
+    direction: 'right' | 'left';
+    children: React.ReactNode;
+}) {
+    const [looperInstances, setLooperInstances] = useState(1);
+    const outerRef = useRef<HTMLDivElement>(null);
+    const innerRef = useRef<HTMLDivElement>(null);
 
-                <div className="flex flex-wrap justify-center gap-5 mt-10 md:justify-around">
-                    <div className="pt-2 text-gray-400 dark:text-gray-400">
-                        <AmazonLogo />
+    function resetAnimation() {
+        if (innerRef?.current) {
+            innerRef.current.setAttribute('data-animate', 'false');
+
+            setTimeout(() => {
+                if (innerRef?.current) {
+                    innerRef.current.setAttribute('data-animate', 'true');
+                }
+            }, 10);
+        }
+    }
+
+    const setupInstances = useCallback(() => {
+        if (!innerRef?.current || !outerRef?.current) return;
+
+        const { width } = innerRef.current.getBoundingClientRect();
+
+        const { width: parentWidth } = outerRef.current.getBoundingClientRect();
+
+        const widthDeficit = parentWidth - width;
+
+        const instanceWidth = width / innerRef.current.children.length;
+
+        if (widthDeficit) {
+            setLooperInstances(
+                looperInstances + Math.ceil(widthDeficit / instanceWidth) + 1
+            );
+        }
+
+        resetAnimation();
+    }, [looperInstances]);
+
+    /*
+    6 instances, 200 each = 1200
+    parent = 1700
+  */
+
+    useEffect(() => setupInstances(), [setupInstances]);
+
+    useEffect(() => {
+        window.addEventListener('resize', setupInstances);
+
+        return () => {
+            window.removeEventListener('resize', setupInstances);
+        };
+    }, [looperInstances, setupInstances]);
+
+    return (
+        <div className="looper" ref={outerRef}>
+            <div
+                className="looper__innerList"
+                ref={innerRef}
+                data-animate="true"
+            >
+                {[...Array(looperInstances)].map((_, ind) => (
+                    <div
+                        key={ind}
+                        className="looper__listInstance"
+                        style={{
+                            animationDuration: `${speed}s`,
+                            animationDirection:
+                                direction === 'right' ? 'reverse' : 'normal',
+                        }}
+                    >
+                        {children}
                     </div>
-                    <div className="text-gray-400 dark:text-gray-400">
-                        <VerizonLogo />
-                    </div>
-                    <div className="text-gray-400 dark:text-gray-400">
-                        <MicrosoftLogo />
-                    </div>
-                    <div className="pt-1 text-gray-400 dark:text-gray-400">
-                        <NetflixLogo />
-                    </div>
-                    <div className="pt-2 text-gray-400 dark:text-gray-400">
-                        <SonyLogo />
-                    </div>
-                    {/* <div className="pt-2 text-gray-400 dark:text-gray-400">
-                        <Image
-                            src="/img/brands/logo_mandiri.svg"
-                            alt="mandiri"
-                            width={100}
-                            height={100}
-                            className="text-gray-400 m-0 p-0"
-                        ></Image>
-                    </div> */}
-                </div>
+                ))}
             </div>
-        </Container>
+        </div>
     );
 };
 
-export default TrustedBy;
+export const InfiniteLoop1 = () => (
+    <div className="my-16">
+        {/* row 1 */}
+        <InfiniteLooper speed={75} direction="right">
+            <div className="flex align-middle justify-center items-center">
+                <div className="pt-2 mx-8  text-gray-400 ">
+                    <AmazonLogo />
+                </div>
+                <div className="pt-2 mx-8  text-gray-400 ">
+                    <VerizonLogo />
+                </div>
+                <div className="pt-2 mx-8  text-gray-400 ">
+                    <MicrosoftLogo />
+                </div>
+                <div className="pt-2 mx-8  text-gray-400 ">
+                    <NetflixLogo />
+                </div>
+                <div className="pt-2 mx-8 text-gray-400 ">
+                    <SonyLogo />
+                </div>
+            </div>
+        </InfiniteLooper>
+    </div>
+);
 
 function AmazonLogo() {
     return (

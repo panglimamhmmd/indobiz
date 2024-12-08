@@ -132,61 +132,66 @@ const InfiniteLooper = function InfiniteLooper({
 
 export const InfiniteLoop = () => (
     <div className="app mt-10">
-        <h1 className="description text-4xl font-extrabold text-black">
-            Testimonials
-        </h1>
-        <p className="description text-gray-500">
-            Kepercayaan yang Kami Bangun Melalui Pelayanan Terbaik
-        </p>
-
+        <div className="mb-10">
+            <h1 className="description text-4xl font-extrabold text-black">
+                Testimonials
+            </h1>
+            <p className="description text-gray-500 ">
+                Kepercayaan yang Kami Bangun Melalui Pelayanan Terbaik
+            </p>
+        </div>
         {/* row 1 */}
-        <InfiniteLooper speed={100} direction="right">
+        <InfiniteLooper speed={75} direction="right">
             {data1.map((item, index) => (
                 <div
                     key={index}
-                    className="flex bg-[#fff] mx-2 pr-4 lg:pr-0 w-auto lg:w-80 rounded-xl items-center mt-6 shadow-lg hover:shadow-xl  duration-300 transform hover:-translate-y-1 transition-transform"
+                    className="mt-2 flex bg-[#fff] mx-1 pr-1 md:pr-4 lg:pr-0 w-[calc(100%-8px)] md:w-auto lg:w-80 rounded-xl items-center  border-gray-300 hover:border-orange border-2 duration-300 transform hover:-translate-y-1 transition-transform"
                 >
-                    <div className="p-3">
+                    <div className="p-1 md:p-3">
                         <Image
                             src={item.image}
-                            width="70"
-                            className="rounded-2xl"
-                            height="70"
+                            width="40"
+                            height="40"
+                            className="rounded-xl"
                             alt="Avatar"
                             placeholder="blur"
                         />
                     </div>
-                    <div className="flex flex-col ">
-                        <h1 className="font-bold text-xl text-black">
+                    <div className="flex flex-col ml-1">
+                        <h1 className="font-bold text-sm md:text-xl text-black">
                             {item.name}
                         </h1>
-                        <p className="text-gray-700">{item.title}</p>
+                        <p className="text-xs md:text-base text-gray-700">
+                            {item.title}
+                        </p>
                     </div>
                 </div>
             ))}
         </InfiniteLooper>
         {/* row 2 */}
-        <InfiniteLooper speed={100} direction="left">
+        <InfiniteLooper speed={75} direction="left">
             {data2.map((item, index) => (
                 <div
                     key={index}
-                    className="flex bg-[#fff] mx-2 pr-4 lg:pr-0 w-auto lg:w-80 rounded-2xl items-center mt-6 shadow-lg hover:shadow-xl  duration-300 transform hover:-translate-y-1 transition-transform"
+                    className="flex bg-[#fff] mx-1 pr-1 md:pr-4 lg:pr-0 w-[calc(100%-8px)] md:w-auto lg:w-80 rounded-xl items-center mt-4 border-gray-300 hover:border-amber-400 border-2 duration-300 transform hover:-translate-y-1 transition-transform"
                 >
-                    <div className="p-3">
+                    <div className="p-1 md:p-3">
                         <Image
                             src={item.image}
-                            width="70"
-                            className="rounded-2xl"
-                            height="70"
+                            width="40"
+                            height="40"
+                            className="rounded-xl"
                             alt="Avatar"
                             placeholder="blur"
                         />
                     </div>
-                    <div className="flex flex-col ">
-                        <h1 className="font-bold text-xl text-black">
+                    <div className="flex flex-col ml-1">
+                        <h1 className="font-bold text-sm md:text-xl text-black">
                             {item.name}
                         </h1>
-                        <p className="text-gray-700">{item.title}</p>
+                        <p className="text-xs md:text-base text-gray-700">
+                            {item.title}
+                        </p>
                     </div>
                 </div>
             ))}
@@ -195,41 +200,3 @@ export const InfiniteLoop = () => (
         {/* row 3 */}
     </div>
 );
-
-interface AvatarProps {
-    image: any;
-    name: string;
-    title: string;
-}
-
-function Avatar(props: Readonly<AvatarProps>) {
-    return (
-        <div className="flex items-center mt-8 space-x-3 bg-orange">
-            <div className="flex-shrink-0 overflow-hidden rounded-full w-40 h-40">
-                <Image
-                    src={props.image}
-                    width="100"
-                    height="100"
-                    alt="Avatar"
-                    placeholder="blur"
-                />
-            </div>
-            <div>
-                <div className="text-lg font-medium">{props.name}</div>
-                <div className="text-gray-600 dark:text-gray-400">
-                    {props.title}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function Mark(props: { readonly children: React.ReactNode }) {
-    return (
-        <>
-            <mark className="text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200">
-                {props.children}
-            </mark>
-        </>
-    );
-}
