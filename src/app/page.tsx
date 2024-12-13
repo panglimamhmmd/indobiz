@@ -10,17 +10,10 @@ export default function Home() {
         <Container>
             <Hero />
             <InfiniteLoop1 />
-
             <Services />
-
-            {/* client side rendering */}
-
             <InfiniteLoop />
 
-            {/* client side rendering */}
-
             <Articles />
-
             <Cta />
         </Container>
     );

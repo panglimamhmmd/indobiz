@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { GET_POST_BY_SLUG } from '@/middleware/GraphqlQuery';
-import { getClient } from '@/middleware/AppoloClient';
 import { formatDate } from '@/middleware/ArticleHandling';
 
 async function ArticleDetails({ params }: { params: { slug: string } }) {
@@ -21,8 +20,6 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
         }
 
         const result = await response.json();
-        console.log(result);
-
         const article = result.data?.postBy || [];
 
         return (

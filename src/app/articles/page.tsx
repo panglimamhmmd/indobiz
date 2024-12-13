@@ -9,7 +9,6 @@ import {
     truncateString,
 } from '@/middleware/ArticleHandling';
 
-import { getClient } from '@/middleware/AppoloClient';
 import { GET_LATEST_POSTS } from '@/middleware/GraphqlQuery';
 
 export default async function Articles() {

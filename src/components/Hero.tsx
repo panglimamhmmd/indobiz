@@ -7,7 +7,7 @@ import { RedirectButton } from '@/components/Redirect';
 export const Hero = () => {
     return (
         <>
-            <Container className="flex flex-wrap ">
+            <div className="flex flex-wrap ">
                 <div className="flex items-center w-full mb-10  lg:w-1/2 lg:mb-0  ">
                     <div className="max-w-2xl space-y-10 ">
                         <h1 className="text-4xl font-bold leading-tracking-tight text-black lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight ">
@@ -22,8 +22,8 @@ export const Hero = () => {
                             panjang.
                         </p>
 
-                        <div className="flex space-y-5 space-x-4 sm:space-y-0 sm:items-center sm:flex-row ">
-                            <div className="flex gap-1">
+                        <div className="flex flex-wrap space-y-5 space-x-4 sm:space-y-0 sm:items-center sm:flex-row ">
+                            <div className="flex gap-3 ">
                                 <Link
                                     href="/services"
                                     className="px-4 hover:text-amber-400 hover:border-amber-400 duration-300 text-sm content-center py-2 lg:text-lg font-bold text-center text-orange border-orange border-2 rounded-2xl "
@@ -64,7 +64,7 @@ export const Hero = () => {
                         </div>
 
                         {/* <Benefit /> */}
-                        <div className="flex items-center justify-evenly w-full shadow-xl bg-orange rounded-2xl text-center p-4">
+                        <div className="flex items-center gap-3 w-full shadow-xl bg-orange rounded-2xl text-center p-4">
                             <p className=" flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
                                 27k+
                                 <span className="block text-sm lg:text-lg font-normal no-wrap">
@@ -101,22 +101,10 @@ export const Hero = () => {
                         />
                     </div>
                 </div>
-            </Container>
+            </div>
         </>
     );
 };
-
-const Twitter = ({ size = 24 }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={size}
-        height={size}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-    >
-        <path d="M24 4.37a9.6 9.6 0 0 1-2.83.8 5.04 5.04 0 0 0 2.17-2.8c-.95.58-2 1-3.13 1.22A4.86 4.86 0 0 0 16.61 2a4.99 4.99 0 0 0-4.79 6.2A13.87 13.87 0 0 1 1.67 2.92 5.12 5.12 0 0 0 3.2 9.67a4.82 4.82 0 0 1-2.23-.64v.07c0 2.44 1.7 4.48 3.95 4.95a4.84 4.84 0 0 1-2.22.08c.63 2.01 2.45 3.47 4.6 3.51A9.72 9.72 0 0 1 0 19.74 13.68 13.68 0 0 0 7.55 22c9.06 0 14-7.7 14-14.37v-.65c.96-.71 1.79-1.6 2.45-2.61z" />
-    </svg>
-);
 
 const Facebook = ({ size = 24 }) => (
     <svg
@@ -152,31 +140,3 @@ const Linkedin = ({ size = 24 }) => (
         <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.27 20.1H3.65V9.24h3.62V20.1zM5.47 7.76h-.03c-1.22 0-2-.83-2-1.87 0-1.06.8-1.87 2.05-1.87 1.24 0 2 .8 2.02 1.87 0 1.04-.78 1.87-2.05 1.87zM20.34 20.1h-3.63v-5.8c0-1.45-.52-2.45-1.83-2.45-1 0-1.6.67-1.87 1.32-.1.23-.11.55-.11.88v6.05H9.28s.05-9.82 0-10.84h3.63v1.54a3.6 3.6 0 0 1 3.26-1.8c2.39 0 4.18 1.56 4.18 4.89v6.21z" />
     </svg>
 );
-
-const Backlink = () => {
-    return (
-        <a
-            href="https://web3templates.com"
-            target="_blank"
-            rel="noopener"
-            className="absolute flex px-3 py-1 space-x-2 text-sm font-semibold text-gray-900 bg-white border border-gray-300 rounded shadow-sm place-items-center left-5 bottom-5 dark:bg-trueGray-900 dark:border-trueGray-700 dark:text-trueGray-300"
-        >
-            <svg
-                width="20"
-                height="20"
-                viewBox="0 0 30 30"
-                fill="none"
-                className="w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <rect width="30" height="29.5385" rx="2.76923" fill="#362F78" />
-                <path
-                    d="M10.14 21.94H12.24L15.44 12.18L18.64 21.94H20.74L24.88 8H22.64L19.58 18.68L16.36 8.78H14.52L11.32 18.68L8.24 8H6L10.14 21.94Z"
-                    fill="#F7FAFC"
-                />
-            </svg>
-
-            <span>Web3Templates</span>
-        </a>
-    );
-};

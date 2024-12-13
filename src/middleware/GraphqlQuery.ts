@@ -1,5 +1,3 @@
-import {gql } from '@apollo/client';
-
 export const GET_LATEST_4_POSTS = `
   query GetLatestPosts {
     posts(first: 4) {
