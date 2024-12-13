@@ -1,6 +1,6 @@
 import {gql } from '@apollo/client';
 
-export const GET_LATEST_4_POSTS = gql`
+export const GET_LATEST_4_POSTS = `
   query GetLatestPosts {
     posts(first: 4) {
       nodes {
@@ -30,7 +30,7 @@ export const GET_LATEST_4_POSTS = gql`
   }
 `;
 
-export const GET_LATEST_POSTS = gql`
+export const GET_LATEST_POSTS = `
 query GetLatestPosts($first: Int, $after: String) {
     posts(first: $first, after: $after) {
         edges {
@@ -65,7 +65,7 @@ query GetLatestPosts($first: Int, $after: String) {
 }
 `;
 
-export const GET_POST_BY_SLUG = gql`
+export const GET_POST_BY_SLUG = `
 query GetPostBySlug($slug: String!) {
     postBy(slug: $slug) {
         id

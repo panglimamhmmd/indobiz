@@ -1,20 +1,36 @@
+'use server';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getClient } from '@/middleware/AppoloClient';
-import { GET_LATEST_4_POSTS } from '../middleware/GraphqlQuery';
-
 import {
     calculateReadingTime,
     sanitizeExcerpt,
     truncateString,
 } from '@/middleware/ArticleHandling';
 
+import { GET_LATEST_4_POSTS } from '@/middleware/GraphqlQuery';
+
 export const Articles = async () => {
     try {
-        const { data } = await getClient().query({ query: GET_LATEST_4_POSTS });
+        const response = await fetch('https://panglimamuhammad.me/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                query: GET_LATEST_4_POSTS,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        const articles = result.data?.posts?.nodes || [];
+
         return (
             <div>
-                <section id="articles" className="pt-20 pb-10 ">
+                <section id="articles" className="pt-20 pb-10">
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl mx-auto text-center mb-10">
                             <h1 className="text-4xl font-bold text-gray-900 mb-6">
@@ -27,9 +43,8 @@ export const Articles = async () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {/* article cards */}
-
-                            {data.posts.nodes.map((article: any) => (
+                            {/* Render Article Cards */}
+                            {articles.map((article: any) => (
                                 <article
                                     key={article.id}
                                     className="bg-[#fff] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group"
@@ -38,17 +53,17 @@ export const Articles = async () => {
                                         <Image
                                             src={
                                                 article.featuredImage?.node
-                                                    .sourceUrl ||
+                                                    ?.sourceUrl ||
                                                 '/img/default.jpg'
                                             }
-                                            alt={article.title.split(' ')[0]}
+                                            alt={article.title || 'Article'}
                                             width={400}
                                             height={300}
                                             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                                         />
                                         <div className="absolute top-4 left-4">
                                             <span className="inline-block bg-orange text-white text-sm px-3 py-1 rounded-full">
-                                                {article.categories.nodes[0]
+                                                {article.categories?.nodes[0]
                                                     ?.name || 'Category'}
                                             </span>
                                         </div>
@@ -61,11 +76,11 @@ export const Articles = async () => {
                                         </div>
                                         <Link
                                             href={`/articles/${article.slug}`}
-                                            className="text-xl font-bold text-gray-900 "
+                                            className="text-xl font-bold text-gray-900"
                                         >
                                             {truncateString(article.title)}
                                         </Link>
-                                        <p className="text-gray-600 my-3 ">
+                                        <p className="text-gray-600 my-3">
                                             {sanitizeExcerpt(
                                                 truncateString(
                                                     article.excerpt,
@@ -76,7 +91,7 @@ export const Articles = async () => {
                                         </p>
                                         <Link
                                             href={`/articles/${article.slug}`}
-                                            className=" inline-flex items-center text-orange-500 font-medium group-hover:text-amber-400  transition-colors text-orange"
+                                            className="inline-flex items-center text-orange-500 font-medium group-hover:text-amber-400 transition-colors text-orange"
                                         >
                                             Read More
                                             <svg
@@ -111,8 +126,15 @@ export const Articles = async () => {
             </div>
         );
     } catch (error) {
-        console.log('Terjadi Fetch Error', error);
-        return <h1 className="text-xl font-bold"> Articles Section</h1>;
+        console.error('Fetch Error:', error);
+        return (
+            <div>
+                <h1 className="text-xl font-bold text-red-500">
+                    Failed to Load Articles
+                </h1>
+                <p>Please try again later.</p>
+            </div>
+        );
     }
 };
 

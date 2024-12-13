@@ -10,11 +10,11 @@ export const { getClient } = registerApolloClient(() => {
     return new ApolloClient({
       cache: new InMemoryCache(),
       link: new HttpLink({
-        uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+        uri: 'https://panglimamuhammad.me/graphql',
       }),
-    });
+          });
   } catch (error) {
-    console.error("Error creating Apollo Client:", error);
+    console.error("Error creating Apollo Client, ADA ERROR CUYY DI APOLO CLIENT:", error);
     throw error; // Re-throw the error if you need to fail the operation
   }
 });
