@@ -8,6 +8,7 @@ async function ArticleDetails({ params }: { params: { slug: string } }) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'User-Agent': 'indobiz',
             },
             body: JSON.stringify({
                 query: GET_POST_BY_SLUG,

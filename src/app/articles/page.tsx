@@ -17,6 +17,7 @@ export default async function Articles() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'User-Agent': 'indobiz',
             },
             body: JSON.stringify({
                 query: GET_LATEST_POSTS,
