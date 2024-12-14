@@ -6,29 +6,11 @@ import {
     sanitizeExcerpt,
     truncateString,
 } from '@/middleware/ArticleHandling';
-
-import { GET_LATEST_4_POSTS } from '@/middleware/GraphqlQuery';
+import { get4LatestPosts } from '@/utils/GetPost';
 
 export const Articles = async () => {
     try {
-        const response = await fetch('https://panglimamuhammad.me/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'User-Agent': 'indobiz',
-            },
-            body: JSON.stringify({
-                query: GET_LATEST_4_POSTS,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        const articles = result.data?.posts?.nodes || [];
-
+        const articles = await get4LatestPosts();
         return (
             <div>
                 <section id="articles" className="pt-20 pb-10">
@@ -55,7 +37,7 @@ export const Articles = async () => {
                                             src={
                                                 article.featuredImage?.node
                                                     ?.sourceUrl ||
-                                                '/img/default.jpg'
+                                                'https://placehold.co/600x400.png'
                                             }
                                             alt={article.title || 'Article'}
                                             width={400}

@@ -28,16 +28,51 @@ export const GET_LATEST_4_POSTS = `
   }
 `;
 
+export const GET_ALL_POSTS = `
+query GetAllPosts {
+  posts {
+    nodes {
+      id
+      slug
+      title
+      content
+      date
+      excerpt
+      categories {
+        nodes {
+          name
+        }
+      }
+      author {
+        node {
+          name
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+}
+`;
+
 export const GET_LATEST_POSTS = `
 query GetLatestPosts($first: Int, $after: String) {
     posts(first: $first, after: $after) {
         edges {
             node {
-                id
+                id  
                 title
                 excerpt
                 date
                 slug
+                categories {
+                    nodes {
+                        name
+                    }
+                }
                 featuredImage {
                     node {
                         sourceUrl

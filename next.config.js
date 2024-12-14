@@ -34,6 +34,16 @@ const nextConfig = {
                 hostname: 'images.pexels.com',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'demo.wpgraphql.com',
+                pathname: '**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'placehold.co',
+                pathname: '**',
+            },
         ], // Add your domain here
     },
 };

@@ -64,7 +64,7 @@ export const Hero = () => {
                         </div>
 
                         {/* <Benefit /> */}
-                        <div className="flex items-center gap-3 w-full shadow-xl bg-orange rounded-2xl text-center p-4">
+                        <div className="flex items-center justify-center gap-3 w-full shadow-xl bg-orange rounded-2xl text-center p-4 ">
                             <p className=" flex flex-col items-center justify-center text-xl lg:text-4xl font-bold text-white">
                                 27k+
                                 <span className="block text-sm lg:text-lg font-normal no-wrap">
@@ -88,8 +88,8 @@ export const Hero = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center justify-center w-full xl:w-1/2">
-                    <div className="xl:pl-10">
+                <div className="flex items-center justify-center w-full lg:w-1/2">
+                    <div className="lg:pl-10">
                         <Image
                             src={heroImg}
                             width="720"

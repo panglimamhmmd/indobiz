@@ -27,7 +27,7 @@ export const Navbar = () => {
                         <Link
                             href="/"
                             onClick={WhatsappRedirect}
-                            className="px-4 py-2 text-md text-white font-semibold bg-orange rounded-2xl md:ml-5 flex gap-1 items-center transition-all duration-200 hover:bg-amber-400 hover:shadow-lg"
+                            className="px-4 py-2 text-md text-white font-semibold bg-orange rounded-2xl md:ml-5 flex gap-1 items-center transition-all duration-200 hover:bg-amber-400 hover:shadow-md hover:shadow-amber-400"
                         >
                             Konsultasi Sekarang
                             <svg

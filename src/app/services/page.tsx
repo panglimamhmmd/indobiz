@@ -36,7 +36,7 @@ export default function Home() {
                                     />
                                 </div>
                                 <div className="w-full md:w-2/3 flex flex-col space-y-4 p-3">
-                                    <div className="flex justify-between item-center">
+                                    <div className="flex justify-between item-center gap-5">
                                         <p className="text-gray-500 font-medium hidden md:block">
                                             {data.type}
                                         </p>
