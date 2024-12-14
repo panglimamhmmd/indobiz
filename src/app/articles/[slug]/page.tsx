@@ -3,7 +3,11 @@ import { GET_POST_BY_SLUG } from '@/middleware/GraphqlQuery';
 import { formatDate } from '@/middleware/ArticleHandling';
 import { getPostBySlug, getAllPosts } from '@/utils/GetPost';
 
-export async function generateMeta({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+    params,
+}: {
+    params: { slug: string };
+}) {
     try {
         const article = await getPostBySlug(params.slug);
         if (article === 0)
